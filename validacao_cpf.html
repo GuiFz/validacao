@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/style_validacao_cpf.css">
+    <title>Validação de CPF</title>
+</head>
+<body>
+    <div  id="barra_titulo">
+        <img id="logo" src="img/logo_validador.png" alt="Logo" onclick="window.location = 'index.html'">
+        <h1>CPF</h1>
+    </div>
+    <div id="global">
+        <div id="geral">
+            <div id="subgeral">
+                <input type="text" id="userCPF" placeholder="CPF: 000.000.000-00" >
+                <abbr title="Clique ou Pressione Enter"><input type="submit" id="check" onclick="verificaCPF()" value="VERIFICAR"></abbr>
+            </div>
+        </div>
+        <div id="resultado">
+        
+        </div>
+    </div>
+
+    <script language="javascript" src="js/script_validacao_cpf.js"></script>
+</body>
+</html>

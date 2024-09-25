@@ -1,0 +1,99 @@
+body{
+    padding: 0;
+    margin: 0;
+    font-family: helvetica,sans-serif;
+    background-color:#aff ;
+}
+abbr{
+    text-decoration: none;
+}
+#barra_titulo{
+    display: flex;
+    width: 100%;
+    position: sticky;
+    top: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    font-size: 20px; 
+    background-color: black;
+}
+#logo{
+    display: block;
+    width: 50px;
+    height: 50px;
+}
+#logo:hover{
+    cursor:pointer;
+}
+#global{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+#geral{
+    display:flex;
+    margin-top: 30px;
+    width: 400px;
+    height: 450px;
+    padding: 10px;
+    align-items:center;
+    justify-content: center;
+    border: 4px solid #fff;
+    border-radius: 5%;
+    background-color:#0af;
+}
+#userCPF{
+    display: flex;
+    width: 200px;
+    height: 40px;
+    color: #000;
+    font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 40px;
+    border: 4px solid #00f;
+    border-radius: 5px;
+}
+#check{
+    display:flex;
+    width: 210px;
+    height: 50px;
+    text-align: center; 
+    color: #fff;
+    font-family: verdana;
+    font-weight: bold;
+    font-size: 18px;
+    background-color: #0af;
+    border: 4px solid #00f;
+    border-radius: 5px;
+}
+#check:hover{
+    background-color: #009;
+}
+#resultado{
+    display:flex;
+    margin-top: 30px;
+    width: 390px;
+    height: 450px;
+    padding: 5px;
+    align-items:center;
+    justify-content: center;
+    line-height: 50px;
+    font-weight: bold;
+    border: 4px solid #000;
+    border-radius: 5%;
+    background-color:#fff;
+}
+.valido{
+    font-size: 25px;
+    color: #0a0;
+}
+.invalido{
+    font-size: 25px;
+    color:#f00;
+}
