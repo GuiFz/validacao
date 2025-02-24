@@ -1,0 +1,35 @@
+a{
+    text-decoration: none;
+}
+header{
+    display: flex;
+    width: 100vw;
+    height: 70px;
+    position: fixed;
+    top: 0px;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    font-size: 20px;
+    font-family: Helvetica, sans-serif !important; 
+    background-color: #066348;
+    z-index: 5;
+}
+#logo{
+    margin-left:40px;
+    width: 55px;
+}
+#links{
+    display: flex;
+    height: 100%;
+    margin-right: 15%;
+    gap: 20px;
+}
+#links a{
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    color:#FFF;
+    cursor: pointer;
+}

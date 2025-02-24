@@ -1,65 +1,85 @@
 let inpCPF = document.getElementById("userCPF");/*Contém o elemento input onde é digitado o cpf */
-let outResp = document.getElementById("resultado");/*Contem o elemento div onde é mostrado o resultado*/
-let CPF = " "; 
-let CPFTratado = 0;
+// let outResp = document.getElementById("resultado");/*Contem o elemento div onde é mostrado o resultado*/
+let CPF = " ";
+let CPFPure = 0;
 
-function verificaCPF(){
+function validateCPF() {
     CPF = inpCPF.value;
-    if(CPF.length < 14){
-        outResp.innerText = "DIGITE 11 DIGITOS SENDO TODOS NÚMEROS !";        
-    }else{
-        CPF = trataCPF(CPF);
-        if(resposta(CPF) === true){
-            outResp.innerHTML = `<span class=\"valido\">CPF VÁLIDO</span>`;       
-        }else{
-            outResp.innerHTML = `<span class=\"invalido\">CPF INVÁLIDO</span>`;            
+    if (CPF.length < 14) {
+        Swal.fire({
+            title: "Digite todos os digitos do CPF",
+            text: "Um CPF deve ter 11 Digitos",
+            icon: "warning"
+        })
+    } else {
+        CPF = removeCharCPF();
+        if (response(CPF) === true) {
+            Swal.fire({
+                title: "CPF Válido",
+                text: "Este CPF passou no cálculo !",
+                icon: "success"
+            })
+        } else {
+            Swal.fire({
+                title: "CPF Inválido",
+                text: "Este CPF não passou no cálculo !",
+                icon: "error"
+            })
         }
     }
 }
 
-function resposta(respCPF){
+function response(respCPF) {
+    String(respCPF);
+
+    if((respCPF[0] === respCPF[1] && respCPF[2] === respCPF[3] && respCPF[4] === respCPF[5] && respCPF[6] === respCPF[7] && respCPF[8] === respCPF[9] && respCPF[10] === respCPF[0])){
+        return false;
+    }
+
     let peso1 = 0;
-    for(let pos = 0, mult  = 10 ; mult >= 2 && pos <= 9; mult--, pos++){
-        peso1 += respCPF[pos]*mult; 
+    for (let pos = 0, mult = 10; mult >= 2 && pos <= 9; mult--, pos++) {
+        peso1 += respCPF[pos] * mult;
     }
 
     let peso2 = 0;
-    for(let pos = 0, mult  = 11 ; mult >= 2 && pos <= 10; mult--, pos++){
-        peso2 += respCPF[pos]*mult; 
+    for (let pos = 0, mult = 11; mult >= 2 && pos <= 10; mult--, pos++) {
+        peso2 += respCPF[pos] * mult;
     }
-    
-    return (11-(peso1 % 11) == CPF[9] && 11 - (peso2 % 11) == CPF[10])
+
+    return (11 - (peso1 % 11) == CPF[9] && 11 - (peso2 % 11) == CPF[10])
 }
 
-/*O cpf tratado é a string pega da input, depois de ter removidos os pontos (.) e hífen */
-function trataCPF(usCPF){
-        CPFTratado = usCPF.replaceAll(".","");
-        CPFTratado = CPFTratado.replace("-","");
-    return String(CPFTratado);
- }
+/*O cpf tratado é a string pega da input, depois de ter removidos os pontos e hífen */
 
- /*Limita digitos da input */
-inpCPF.addEventListener("input", ()=>{
-    if(inpCPF.value.length > 14){
-        inpCPF.value = String(inpCPF.value).slice(0, -1);
-    }    
-})
+function removeCharCPF() {
+    CPFPure =  inpCPF.value.replace(/\D/g, "");
+    return String(CPFPure);
+}
 
-/*Eventos de teclado */
-document.addEventListener("keyup",(tecla)=>{
-    if(tecla.key === "Enter"){
-        document.getElementById("check").click();
+inpCPF.addEventListener("input", function (event) {
+    
+    // Remove tudo que não for número
+    let cpfValue = inpCPF.value.replace(/\D/g, "");
+
+    // Limita o CPF para no máximo 11 digitos
+    if (cpfValue.length > 11) {
+        cpfValue = cpfValue.slice(0, 11);
     }
-    else if(tecla.key === "Backspace"){
-        if (inpCPF.value.length === 4 || inpCPF.value.length === 8 || inpCPF.value.length === 12){
-            inpCPF.value = String(inpCPF.value).slice(0, -2);
+
+    // Aplica a máscara progressiva conforme a quantidade de dígitos
+    if (event.inputType !== "deleteContentBackward") {
+        if (cpfValue.length >= 3 && cpfValue.length < 6) {
+            inpCPF.value = cpfValue.replace(/(\d{3})/, "$1.");
+        } else if (cpfValue.length >= 6 && cpfValue.length < 9) {
+            inpCPF.value = cpfValue.replace(/(\d{3})(\d{3})/, "$1.$2.");
+        } else if (cpfValue.length >= 9 && cpfValue.length < 11) {
+            inpCPF.value = cpfValue.replace(/(\d{3})(\d{3})(\d{3})/, "$1.$2.$3-");
+        } else if (cpfValue.length <= 11) {
+            inpCPF.value = cpfValue.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
         }
     }
-    else if (typeof(Number(tecla.key)) != isNaN){
-        if (inpCPF.value.length === 3 || inpCPF.value.length === 7 ){ 
-            inpCPF.value += ".";
-        }else if(inpCPF.value.length === 11){
-            inpCPF.value += "-"
-        }
-    }
+});
+
+document.getElementById("buttonValidate").addEventListener("click", function(){
+    validateCPF();
 })
