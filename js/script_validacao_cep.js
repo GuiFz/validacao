@@ -2,9 +2,6 @@ const inputCep = document.getElementById("userCEP");
 const outputInfo = document.getElementById("outForm");
 const outputInfoElements = outputInfo.getElementsByTagName("input");
 
-// inputCep.maxLegth = 9;
-
-
 
 inputCep.addEventListener("input", function (event) {
     if (!/^\d+$/.test(event.target.value)) {
